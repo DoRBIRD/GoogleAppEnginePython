@@ -14,11 +14,13 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
+
 def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     """Constructs a Datastore key for a Guestbook entity.
     We use guestbook_name as the key.
     """
     return ndb.Key('Guestbook', guestbook_name)
+
 
 # [START greeting]
 class Author(ndb.Model):
@@ -32,11 +34,12 @@ class Greeting(ndb.Model):
     author = ndb.StructuredProperty(Author)
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
+
+
 # [END greeting]
 
 # [START main_page]
 class MainPage(webapp2.RequestHandler):
-
     def get(self):
         guestbook_name = self.request.get('guestbook_name',
                                           DEFAULT_GUESTBOOK_NAME)
@@ -62,11 +65,12 @@ class MainPage(webapp2.RequestHandler):
 
         template = JINJA_ENVIRONMENT.get_template('templates/guestbook.html')
         self.response.write(template.render(template_values))
+
+
 # [END main_page]
 
 # [START guestbook]
 class Guestbook(webapp2.RequestHandler):
-
     def post(self):
         # We set the same parent key on the 'Greeting' to ensure each
         # Greeting is in the same entity group. Queries across the
@@ -79,19 +83,41 @@ class Guestbook(webapp2.RequestHandler):
 
         if users.get_current_user():
             greeting.author = Author(
-                    identity=users.get_current_user().user_id(),
-                    email=users.get_current_user().email())
+                identity=users.get_current_user().user_id(),
+                email=users.get_current_user().email())
 
         greeting.content = self.request.get('content')
         greeting.put()
 
         query_params = {'guestbook_name': guestbook_name}
         self.redirect('/?' + urllib.urlencode(query_params))
+
+
 # [END guestbook]
+
+# [START bootstrap_test]
+class Bootstrap(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('templates/bootstraptest.html')
+        self.response.write(template.render())
+
+
+# [END bootstrap_test]
+
+# [START memory]
+class Memory(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('templates/memory.html')
+        self.response.write(template.render())
+
+
+# [END memory]
 
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
+    ('/bootstrap_test', Bootstrap),
+    ('/memory', Memory),
 ], debug=True)
 # [END app]

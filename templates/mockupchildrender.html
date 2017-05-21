@@ -1,0 +1,106 @@
+{% extends "templates/mockupparent.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!--This is a comment. Comments are not displayed in the browser-->
+{% endblock head %}
+{% block pagecontent %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Start Render</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+
+        <div class="col-lg-8 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Settings
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    <div class="row col-xs-12">
+                        <form class="col-xs-12">
+                            <div class="form-group col-md-6">
+                                <label for="exampleSelect1">Example select</label>
+                                <select class="form-control" id="exampleSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="exampleSelect1">Example select</label>
+                                <select class="form-control" id="exampleSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="exampleSelect1">Example select</label>
+                                <select class="form-control" id="exampleSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="exampleSelect1">Example select</label>
+                                <select class="form-control" id="exampleSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="exampleSelect1">Example select</label>
+                                <select class="form-control" id="exampleSelect1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary col-md-12">Start Render</button>
+                            <div class="col-xs-12"> &nbsp;</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span class="pull-left"> Title </span>
+                            <span class="pull-right"> date <i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    <img src="static/images/render_thumbnails/{{ animation_id }}.jpg" class="render-thumbnail">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+{% endblock %}
+
+
+
+

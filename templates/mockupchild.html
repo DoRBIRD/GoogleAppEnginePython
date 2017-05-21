@@ -1,0 +1,57 @@
+{% extends "templates/mockupparent.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+<!--This is a comment. Comments are not displayed in the browser-->
+{% endblock %}
+{% block pagecontent %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">My Animations</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        {% for animation in animations %}
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="pull-left"> {{ animation.title }}</span>
+                                <span class="pull-right">{{ animation.date }} <i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body" style="padding: 0;">
+                        <img src="static/images/render_thumbnails/{{ animation.user }}/{{ animation.file_id }}.jpg" class="render-thumbnail">
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Dsetails</span>
+                            <a href="/mockup_render_{{ animation.file_id }}" > <span class="pull-right">Render <i class="fa fa-arrow-circle-right"></i></span></a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="upload-drop-zone" id="drop-zone">
+                Just drag and drop files here
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+{% endblock %}
+
+
+
+

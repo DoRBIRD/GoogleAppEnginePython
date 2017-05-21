@@ -1,11 +1,11 @@
 import os
 import urllib
 
+import webapp2
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
 import jinja2
-import webapp2
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -113,11 +113,50 @@ class Memory(webapp2.RequestHandler):
 
 # [END memory]
 
+
+# [START Mockup]
+class Animation():
+    def __init__(self, user, title, date, file_id):
+        self.user = user
+        self.title = title
+        self.date = date
+        self.file_id = file_id
+
+
+class Mockup(webapp2.RequestHandler):
+    def get(self):
+        user = "jonas"
+        animations = [Animation("jonas", "My First Animation", "Yesterday", "0"),
+                      Animation("jonas", "My Second Animation", "Today", "1")]
+        template_values = {
+            'user': user,
+            'animations': animations,
+        }
+        template = JINJA_ENVIRONMENT.get_template('templates/mockupchild.html')
+        self.response.write(template.render(template_values))
+
+
+class MockupRender(webapp2.RequestHandler):
+    def get(self, animation_id):
+        user = "Jonas"
+        template_values = {
+            'user': user,
+            'animation_id': animation_id,
+        }
+        template = JINJA_ENVIRONMENT.get_template('templates/mockupchildrender.html')
+        self.response.write(template.render(template_values))
+
+
+
+# [END Mockup]
+
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
     ('/bootstrap_test', Bootstrap),
     ('/memory', Memory),
+    ('/mockup', Mockup),
+    ('/mockup_render_(\d+)', MockupRender),
 ], debug=True)
 # [END app]
